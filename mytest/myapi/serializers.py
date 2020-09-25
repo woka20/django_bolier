@@ -6,6 +6,10 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         model=Hero
         fields=('id','name','alias')
 
+class ThirdApiSerializer(serializers.Serializer):
+        mapped_object=[]
+      
+
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         ordering = ['-id']

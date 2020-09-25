@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from .models import Hero, Book
-from .serializers import AuthorSerializer, BookSerializer
+from .serializers import AuthorSerializer, BookSerializer, ThirdApiSerializer
 from rest_framework import generics
 from rest_framework.response import Response 
 from django.shortcuts import get_object_or_404
+import requests
 
 # Create your views here.
 class AuthorView(generics.ListCreateAPIView):
     queryset=Hero.objects.all().order_by('id')
     serializer_class=AuthorSerializer
+
 
 class AuthorProfileView(generics.RetrieveAPIView):
     def get(self, request, pk):
