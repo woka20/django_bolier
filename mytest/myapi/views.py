@@ -4,12 +4,24 @@ from .serializers import AuthorSerializer, BookSerializer, ThirdApiSerializer
 from rest_framework import generics
 from rest_framework.response import Response 
 from django.shortcuts import get_object_or_404
-import requests
+from Arajaongkir.thirdapi import get_rajaongkir
+from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework import permissions
 
 # Create your views here.
 class AuthorView(generics.ListCreateAPIView):
     queryset=Hero.objects.all().order_by('id')
     serializer_class=AuthorSerializer
+    http_method_names=["get","post", "UPDATE","DELETE"]
+    permission_classes=[permissions.IsAdminUser,]
+    
+
+
+     
+class ThirdAPIView(generics.ListCreateAPIView):
+    serializer_class= ThirdApiSerializer
+    def get(self, request):
+        return Response (get_rajaongkir())
 
 
 class AuthorProfileView(generics.RetrieveAPIView):
