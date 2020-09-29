@@ -7,13 +7,14 @@ from django.shortcuts import get_object_or_404
 from Arajaongkir.thirdapi import get_rajaongkir
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework import permissions
+from myapi.permission import CustomDjangoModelPermissions
 
 # Create your views here.
 class AuthorView(generics.ListCreateAPIView):
     queryset=Hero.objects.all().order_by('id')
     serializer_class=AuthorSerializer
     http_method_names=["get","post", "UPDATE","DELETE"]
-    permission_classes=[permissions.IsAdminUser,]
+    permission_classes=[permissions.IsAuthenticated,CustomDjangoModelPermissions]
     
 
 
